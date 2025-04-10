@@ -4,3 +4,4 @@ numpy
 scipy
 cvxpy
 matplotlib
+plotly

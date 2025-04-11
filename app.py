@@ -44,9 +44,9 @@ def solve_portfolio_optimization(mu, Sigma, gamma_value, long_only=True, leverag
 
     prob = cp.Problem(cp.Maximize(ret - gamma * risk), constraints)
     gamma.value = gamma_value
-    prob.solve()
-    return w.value, np.sqrt(risk).value, ret.value
-
+    prob.solve(solver=cp.SCS, verbose=True)
+    risk_value = np.sqrt(risk.value)
+    return w.value, risk_value, ret.value
 
 # --- Streamlit Application ---
 st.title("Interactive Portfolio Optimization Lab")

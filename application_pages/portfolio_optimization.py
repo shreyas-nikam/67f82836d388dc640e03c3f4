@@ -125,6 +125,8 @@ def app():
     fig4.update_layout(xaxis_title="Assets", yaxis_title="Allocation",
                       title="Asset Allocation in Optimal Portfolio")
     st.plotly_chart(fig4, use_container_width=True)
+
+    
     
 if __name__ == '__main__':
     app()

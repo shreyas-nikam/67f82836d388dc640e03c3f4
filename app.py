@@ -8,12 +8,13 @@ import plotly.express as px
 st.set_page_config(page_title="QuLab", layout="wide", initial_sidebar_state="expanded")
 
 st.sidebar.image("https://www.quantuniversity.com/assets/img/logo5.jpg")
+st.sidebar.divider()
+
 page = st.sidebar.selectbox(
-    "Navigation",
+    "Navigate",
     ["Overview", "Factor Covariance Model", "Portfolio Optimization"],
     index=0
 )
-st.sidebar.divider()
 st.title("QuLab")
 st.divider()
 
@@ -238,11 +239,14 @@ elif page == "Portfolio Optimization":
 
 st.divider()
 
+st.markdown("""
+© 2025 QuantUniversity, LLC. All Rights Reserved.
+""", unsafe_allow_html=True)
+
 # Disclaimer and copyright at the bottom
 st.caption(
     """
     <div class="disclaimer">
-        © 2025 QuantUniversity, LLC. All Rights Reserved.<br>
         The purpose of this demonstration is solely for educational use and illustration. Any reproduction of this demonstration requires prior written consent from QuantUniversity, LLC.
     </div>
     """,

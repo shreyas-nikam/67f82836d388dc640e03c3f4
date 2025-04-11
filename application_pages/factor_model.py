@@ -36,8 +36,6 @@ def app():
     under the factor model, and compare the results with the classical model.
 
     This demonstration focuses on explaining the concept. For full interactivity, visit the Portfolio Optimization page.
-
-    ---
     """)
     
 if __name__ == '__main__':

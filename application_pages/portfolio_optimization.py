@@ -24,7 +24,8 @@ def solve_portfolio_optimization(mu, Sigma, gamma_value, long_only=True):
         constraints.append(w >= 0)
     prob = cp.Problem(cp.Maximize(ret_expr - gamma * risk_expr), constraints)
     gamma.value = gamma_value
-    prob.solve()
+    prob.solve(solver=cp.SCS, verbose=True)
+
     # Evaluate risk from the value of quadratic form.
     return w.value, np.sqrt(risk_expr.value), ret_expr.value
 
@@ -106,7 +107,7 @@ def app():
         prob = cp.Problem(cp.Maximize(ret_expr - gamma_param * risk_expr), constraints)
         gamma_param.value = g
         Lmax.value = selected_leverage
-        prob.solve()
+        prob.solve(solver=cp.SCS, verbose=True)
         risk_data_leverage.append(np.sqrt(risk_expr.value))
         ret_data_leverage.append(ret_expr.value)
     fig3 = go.Figure()
@@ -124,6 +125,8 @@ def app():
     fig4.update_layout(xaxis_title="Assets", yaxis_title="Allocation",
                       title="Asset Allocation in Optimal Portfolio")
     st.plotly_chart(fig4, use_container_width=True)
+
+    
     
 if __name__ == '__main__':
     app()

@@ -8,12 +8,13 @@ import plotly.express as px
 st.set_page_config(page_title="QuLab", layout="wide", initial_sidebar_state="expanded")
 
 st.sidebar.image("https://www.quantuniversity.com/assets/img/logo5.jpg")
+st.sidebar.divider()
+
 page = st.sidebar.selectbox(
-    "Navigation",
+    "Navigate",
     ["Overview", "Factor Covariance Model", "Portfolio Optimization"],
     index=0
 )
-st.sidebar.divider()
 st.title("QuLab")
 st.divider()
 
@@ -169,8 +170,34 @@ if page == "Overview":
 
     st.markdown(r"""
     This plot shows the return distributions for two different risk aversion values.
-    The shape of the distribution represents the probability of different return outcomes.
+    The shape of the distribution represents the probability of different return outcomes.""")
+
+    st.markdown("""
+    ## Portfolio Constraints
+
+    There are many other possible portfolio constraints besides the **long-only constraint**.  
+    With no constraint ($W = \\mathbb{R}^n$), the optimization problem has a simple analytical solution.
+
+    We will look in detail at a **leverage limit**, or the constraint that:
+
+    $$
+    \\|w\\|_1 \\leq L_{\\text{max}}
+    $$
+
+    Another interesting constraint is the **market neutral constraint**:
+
+    $$
+    m^T \\Sigma w = 0
+    $$
+
+    where:
+    - $m_i$ is the capitalization of asset $i$.
+    - $M = m^T r$ is the market return.
+    - $m^T \\Sigma w = \\text{cov}(M, R)$.
+
+    The **market neutral constraint** ensures that the portfolio return is **uncorrelated** with the market return.
     """)
+
 
     # --- Visualization 3: Portfolio Optimization with Leverage Limit ---
     st.subheader("Portfolio Optimization with Leverage Limit")
@@ -209,7 +236,21 @@ if page == "Overview":
     This bar graph shows the amount of each asset held in the portfolio.
     Negative holdings indicate a short position.
     """)
+        # --- Variations of Classical Portfolio Optimization ---
+    st.subheader("Variations of Classical Portfolio Optimization")
+    st.markdown("""
+    There are many more variations of classical portfolio optimization. We might require that $μ^T w \geq R_{min}$ and minimize $w^T Σ w$ or $||Σ^{1/2} w||_2$.
 
+    We could include the (broker) cost of short positions as the penalty $s^T (w)^-$ for some $s \geq 0$.
+
+    We could also include transaction costs (from a previous portfolio $w_{prev}$) as the penalty:
+
+    $$
+    κ^T |w - w_{prev}|^\eta, \quad κ \geq 0
+    $$
+
+    Common values of $η$ are $η = 1$, $3/2$, and $2$.
+    """, unsafe_allow_html=True)
     # --- Factor Covariance Model Explanation ---
     st.subheader("Factor Covariance Model")
 
@@ -238,11 +279,14 @@ elif page == "Portfolio Optimization":
 
 st.divider()
 
+st.markdown("""
+© 2025 QuantUniversity, LLC. All Rights Reserved.
+""", unsafe_allow_html=True)
+
 # Disclaimer and copyright at the bottom
 st.caption(
     """
     <div class="disclaimer">
-        © 2025 QuantUniversity, LLC. All Rights Reserved.<br>
         The purpose of this demonstration is solely for educational use and illustration. Any reproduction of this demonstration requires prior written consent from QuantUniversity, LLC.
     </div>
     """,

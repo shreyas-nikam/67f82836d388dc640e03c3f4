@@ -58,7 +58,7 @@ if page == "Overview":
     # --- Streamlit Application ---
     st.title("Portfolio Optimization Lab")
 
-    st.markdown("""
+    st.markdown(r"""
     ## Overview
 
     This application provides an interactive environment for exploring portfolio optimization concepts based on classical Markowitz optimization.
@@ -67,51 +67,51 @@ if page == "Overview":
 
     The *portfolio allocation vector* defines how an investment budget is distributed across different assets. Let's define:
 
-    *   `w`: the portfolio allocation vector, where `w ∈ R^n`.
-    *   `wi`: the fraction of money invested in asset `i`.
+    *   $w$: the portfolio allocation vector, where $w \in \mathbb{R}^n$.
+    *   $w_i$: the fraction of money invested in asset $i$.
 
-    The constraint `1^T w = 1` ensures that the sum of all allocation fractions equals 1, meaning the entire investment budget is allocated.
+    The constraint $1^T w = 1$ ensures that the sum of all allocation fractions equals 1, meaning the entire investment budget is allocated.
 
-    **Short Position:** Borrowing shares to sell now, with the intention of buying them back later. This is denoted by a negative allocation `w_i < 0`.
+    **Short Position:** Borrowing shares to sell now, with the intention of buying them back later. This is denoted by a negative allocation $w_i < 0$.
 
-    **Long-Only Portfolio:** Only investing in assets, without borrowing or shorting. This is denoted by a non-negative allocation `w >= 0`.
+    **Long-Only Portfolio:** Only investing in assets, without borrowing or shorting. This is denoted by a non-negative allocation $w \geq 0$.
 
     **Leverage:**
 
     The leverage is defined as the sum of absolute values of the portfolio weights:
 
-    Where w_i represents the weight of the i-th asset in the portfolio.
+    Where $w_i$ represents the weight of the $i$-th asset in the portfolio.
 
     ## Asset Returns
 
     *Asset returns* describe the percentage change in the price of an asset over a period. Let's define:
 
-    *   `pi > 0`: initial price of asset `i`.
-    *   `pi' > 0`: end-of-period price of asset `i`.
-    *   `ri = (pi' - pi) / pi`: the asset (fractional) return.
-    *   `R = r^T w`: the portfolio (fractional) return.
+    *   $p_i > 0$: initial price of asset $i$.
+    *   $p_i' > 0$: end-of-period price of asset $i$.
+    *   $r_i = (p_i' - p_i) / p_i$: the asset (fractional) return.
+    *   $R = r^T w$: the portfolio (fractional) return.
 
-    A common model assumes `r` is a random variable with mean `E[r] = μ` and covariance `E[(r - μ)(r - μ)^T] = Σ`.
+    A common model assumes $r$ is a random variable with mean $E[r] = \mu$ and covariance $E[(r - \mu)(r - \mu)^T] = \Sigma$.
 
-    **Mean Return (μ):** The average expected return of an asset or portfolio.
+    **Mean Return ($\mu$):** The average expected return of an asset or portfolio.
 
-    **Covariance Matrix (Σ):** A matrix describing the relationships between the returns of different assets.
+    **Covariance Matrix ($\Sigma$):** A matrix describing the relationships between the returns of different assets.
 
-    *   `E[R] = μ^T w`: Expected Portfolio Return.
-    *   `var(R) = w^T Σ w`: Variance of Portfolio Return.
-    *   `std(R) = sqrt(var(R))`: Standard Deviation of Portfolio Return.
+    *   $E[R] = \mu^T w$: Expected Portfolio Return.
+    *   $var(R) = w^T \Sigma w$: Variance of Portfolio Return.
+    *   $std(R) = \sqrt{var(R)}$: Standard Deviation of Portfolio Return.
 
     ## Classical (Markowitz) Portfolio Optimization
 
     Classical (Markowitz) portfolio optimization solves the following problem:
 
-    **Objective Function:** Maximizes the risk-adjusted return, balancing expected return (μ^T w) and risk (w^T Σ w).
+    **Objective Function:** Maximizes the risk-adjusted return, balancing expected return ($\mu^T w$) and risk ($w^T \Sigma w$).
 
-    **Risk Aversion (γ):** A parameter that controls the trade-off between risk and return. Higher values of γ indicate greater risk aversion.
+    **Risk Aversion ($\gamma$):** A parameter that controls the trade-off between risk and return. Higher values of $\gamma$ indicate greater risk aversion.
 
     **Constraint:** The sum of the allocation fractions must equal 1.
 
-    **Feasible Set (W):** The set of allowed portfolios (e.g., long-only portfolios).
+    **Feasible Set ($W$):** The set of allowed portfolios (e.g., long-only portfolios).
     """)
 
     # --- User Inputs ---
@@ -146,9 +146,9 @@ if page == "Overview":
 
     st.plotly_chart(fig1, use_container_width=True)
 
-    st.markdown("""
+    st.markdown(r"""
     This chart illustrates the trade-off between risk and return.
-    Each point on the curve represents an optimal portfolio for a given level of risk aversion (γ).
+    Each point on the curve represents an optimal portfolio for a given level of risk aversion ($\gamma$).
     """)
 
     # --- Visualization 2: Return Distribution ---
@@ -167,7 +167,7 @@ if page == "Overview":
     fig2.update_layout(xaxis_title="Return", yaxis_title="Density")
     st.plotly_chart(fig2, use_container_width=True)
 
-    st.markdown("""
+    st.markdown(r"""
     This plot shows the return distributions for two different risk aversion values.
     The shape of the distribution represents the probability of different return outcomes.
     """)
@@ -190,7 +190,7 @@ if page == "Overview":
     fig3 = px.scatter(x=risk_data_leverage, y=ret_data_leverage, labels={'x': 'Risk', 'y': 'Return'}, title=f'Risk-Return Trade-off with Leverage Limit = {selected_leverage_limit}')
     st.plotly_chart(fig3, use_container_width=True)
 
-    st.markdown("""
+    st.markdown(r"""
     This chart shows the risk-return trade-off curve with a leverage limit.
     The leverage limit constrains the sum of the absolute values of the portfolio weights.
     """)
@@ -205,7 +205,7 @@ if page == "Overview":
     fig4 = px.bar(x=np.arange(num_assets), y=w_optimal, labels={'x': 'Asset', 'y': 'Weight'}, title='Asset Allocation')
     st.plotly_chart(fig4, use_container_width=True)
 
-    st.markdown("""
+    st.markdown(r"""
     This bar graph shows the amount of each asset held in the portfolio.
     Negative holdings indicate a short position.
     """)
@@ -213,18 +213,18 @@ if page == "Overview":
     # --- Factor Covariance Model Explanation ---
     st.subheader("Factor Covariance Model")
 
-    st.markdown("""
+    st.markdown(r"""
     A particularly common and useful variation is to model the covariance matrix (Σ) as a factor model:
 
     Where:
 
-    *   `F`: the factor loading matrix.
-    *   `Σ̃`: the factor covariance matrix.
-    *   `D`: a diagonal matrix representing idiosyncratic risk.
+    *   $F$: the factor loading matrix.
+    *   $\Sigma_a$: the factor covariance matrix.
+    *   $D$: a diagonal matrix representing idiosyncratic risk.
 
     **Factor Exposures:**
 
-    A portfolio is *factor j neutral* if `(F^T w)j = 0`.
+    A portfolio is *factor j neutral* if $(F^T w)_j = 0$.
     """)
 
 

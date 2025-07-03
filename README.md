@@ -1,1 +1,3 @@
-This is a Streamlit application for the Portfolio Optimization Lab.
+# Portfolio Optimization Lab
+
+This is a reset lab starter repository.
